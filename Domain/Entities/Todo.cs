@@ -2,11 +2,14 @@
 
 public class Todo : Entity
 {
+    public Todo()
+    {
+    }
     public Todo(string title, bool isCompleted)
     {
         Title = title;
         IsCompleted = isCompleted;
     }
-    public string Title { get; private set; }
+    public string? Title { get; private set; }
     public bool IsCompleted { get; private set; }
 }

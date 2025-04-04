@@ -1,6 +1,6 @@
-﻿namespace Application.UseCases.Todos.UpdateTodo;
+﻿namespace Application.UseCases.Todos.GetTodoByIdUseCase;
 
-public class UpdateTodoResponse
+public class GetTodoByIdResponse
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = string.Empty;

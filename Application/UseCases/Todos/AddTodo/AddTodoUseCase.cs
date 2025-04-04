@@ -2,6 +2,7 @@
 using Application.UseCases.Common;
 using Domain.Entities;
 using Domain.Shared;
+using Mapster;
 
 namespace Application.UseCases.Todos.AddTodo;
 
@@ -20,7 +21,7 @@ public class AddTodoUseCase : IAddTodoUseCase
         {
             return Result.Failure<AddTodoResponse>("Title cannot be empty.");
         }
-        var todo = new Todo(request.Title, request.IsCompleted);
+        var todo = request.Adapt<Todo>();
         await _todoRepository.AddAsync(todo);
 
         return Result.Success(new AddTodoResponse());

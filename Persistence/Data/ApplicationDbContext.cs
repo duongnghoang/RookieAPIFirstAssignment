@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Persistence.Data;
 
-internal sealed class ApplicationDbContext : DbContext, IApplicationDbContext
+public sealed class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

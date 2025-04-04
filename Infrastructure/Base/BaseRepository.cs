@@ -8,14 +8,14 @@ namespace Infrastructure.Base;
 public class BaseRepository<TEntity> : IBaseRepository<TEntity>
     where TEntity : class
 {
-    private readonly IApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public BaseRepository(IApplicationDbContext context)
+    public BaseRepository(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate)
+    public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
     {
         var query = _context.Set<TEntity>().AsQueryable();
         if (predicate != null)
@@ -44,15 +44,19 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>
         return entity;
     }
 
-    public async Task DeleteAsync(TEntity entity)
+    public void Delete(TEntity entity)
     {
         _context.Set<TEntity>().Remove(entity);
-        await _context.SaveChangesAsync();
     }
 
     public async Task BulkAddAsync(IEnumerable<TEntity> entities)
     {
         await _context.Set<TEntity>().AddRangeAsync(entities);
         await _context.SaveChangesAsync();
+    }
+
+    public Task<int> SaveChangesAsync()
+    {
+        return _context.SaveChangesAsync();
     }
 }

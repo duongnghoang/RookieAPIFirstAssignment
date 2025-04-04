@@ -5,7 +5,7 @@ using Persistence.Data;
 
 namespace Infrastructure.Repositories;
 
-public class TodoRepository(IApplicationDbContext context) : BaseRepository<Todo>(context), ITodoRepository
+public class TodoRepository(ApplicationDbContext context) : BaseRepository<Todo>(context), ITodoRepository
 {
 
 }
