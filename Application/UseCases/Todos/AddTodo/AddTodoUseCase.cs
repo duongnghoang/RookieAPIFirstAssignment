@@ -23,8 +23,9 @@ public class AddTodoUseCase : IAddTodoUseCase
         }
         var todo = request.Adapt<Todo>();
         await _todoRepository.AddAsync(todo);
+        var response = todo.Adapt<AddTodoResponse>();
 
-        return Result.Success(new AddTodoResponse());
+        return Result.Success(response);
     }
 }
 
